@@ -13,12 +13,12 @@ public class DesUtil {
      * key和src的长度必须是8字节
      * 返回的结果也是8字节
      */
-    protected static void desBlockFunc(final byte[] key, final byte[] src, final int inOff, final byte[] result, final int outOff, final boolean encrypting) {
+    private static void desBlockFunc(final byte[] key, final byte[] src, final int inOff, final byte[] result, final int outOff, final boolean encrypting) {
         DES_ENGINE.init(encrypting, new KeyParameter(key));
         DES_ENGINE.processBlock(src, inOff, result, outOff);
     }
 
-    public static final byte[] desEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
+    public static byte[] desEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
         if(key == null || key.length != 8) {
             throw new DesException("Des key should be 8 bytes");
         }
@@ -35,7 +35,7 @@ public class DesUtil {
         return result;
     }
 
-    public static final byte[] desCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
+    public static byte[] desCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
         if(key == null || key.length != 8) {
             throw new DesException("Des key should be 8 bytes");
         }
@@ -74,7 +74,7 @@ public class DesUtil {
         return result;
     }
 
-    public static final byte[] desEdeEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
+    public static byte[] desEdeEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
         if(key == null || key.length != 24) {
             throw new DesException("DesEDE key should be 24 bytes");
         }
@@ -97,7 +97,7 @@ public class DesUtil {
         return result;
     }
 
-    public static final byte[] desEeeEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
+    public static byte[] desEeeEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
         if(key == null || key.length != 24) {
             throw new DesException("DesEDE key should be 24 bytes");
         }
@@ -120,7 +120,7 @@ public class DesUtil {
         return result;
     }
 
-    public static final byte[] desEdeCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
+    public static byte[] desEdeCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
         if(key == null || key.length != 24) {
             throw new DesException("DesEDE key should be 24 bytes");
         }
@@ -167,7 +167,7 @@ public class DesUtil {
         return result;
     }
 
-    public static final byte[] desEeeCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
+    public static byte[] desEeeCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
         if(key == null || key.length != 24) {
             throw new DesException("DesEEE key should be 24 bytes");
         }
