@@ -6,6 +6,9 @@ import org.bouncycastle.crypto.OutputLengthException;
 import org.bouncycastle.crypto.engines.DESEngine;
 import org.bouncycastle.crypto.params.KeyParameter;
 
+/**
+ * 根据DESedeEngine更改的DES EEE的实现
+ */
 public class DESeeeEngine extends DESEngine {
 
     protected static final int BLOCK_SIZE = 8;

@@ -10,6 +10,14 @@ import org.bouncycastle.crypto.params.ParametersWithIV;
 
 public class DesUtil {
 
+    /**
+     * DES ECB加解密的实现
+     * @param key 8字节的密钥
+     * @param src 源数据，长度必须是8字节的整数倍
+     * @param encrypting 加密还是解密
+     * @return 结果
+     * @throws DesException 方法出错时抛出异常
+     */
     public static byte[] desEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
         if(key == null || key.length != 8) {
             throw new DesException("Des key should be 8 bytes");
@@ -32,6 +40,15 @@ public class DesUtil {
         return result;
     }
 
+    /**
+     * DES CBC加解密的实现
+     * @param key 8字节的密钥
+     * @param src 源数据，长度必须是8字节的整数倍
+     * @param icv 8字节的向量
+     * @param encrypting 加密还是解密
+     * @return 结果
+     * @throws DesException 方法出错时抛出异常
+     */
     public static byte[] desCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
         if(key == null || key.length != 8) {
             throw new DesException("Des key should be 8 bytes");
@@ -57,6 +74,14 @@ public class DesUtil {
         return result;
     }
 
+    /**
+     * 3DES EDE ECB加解密的实现
+     * @param key 密钥，长度为16或者24字节
+     * @param src 源数据，长度必须是8字节的整数倍
+     * @param encrypting 加密还是解密
+     * @return 结果
+     * @throws DesException 方法出错时抛出异常
+     */
     public static byte[] desEdeEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
         if(key == null || (key.length != 16 && key.length != 24)) {
             throw new DesException("DesEDE key should be 16 or 24 bytes");
@@ -79,6 +104,14 @@ public class DesUtil {
         return result;
     }
 
+    /**
+     * 3DES EEE ECB加解密的实现
+     * @param key 密钥，长度为16或者24字节
+     * @param src 源数据，长度必须是8字节的整数倍
+     * @param encrypting 加密还是解密
+     * @return 结果
+     * @throws DesException 方法出错时抛出异常
+     */
     public static byte[] desEeeEcb(final byte[] key, final byte[] src, final boolean encrypting) throws DesException {
         if(key == null || (key.length != 16 && key.length != 24)) {
             throw new DesException("DesEDE key should be 16 or 24 bytes");
@@ -101,6 +134,15 @@ public class DesUtil {
         return result;
     }
 
+    /**
+     * 3DES EDE CBC加解密的实现
+     * @param key 密钥，长度为16或者24字节
+     * @param src 源数据，长度必须是8字节的整数倍
+     * @param icv 8字节的向量
+     * @param encrypting 加密还是解密
+     * @return 结果
+     * @throws DesException 方法出错时抛出异常
+     */
     public static byte[] desEdeCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
         if(key == null || (key.length != 16 && key.length != 24)) {
             throw new DesException("DesEDE key should be 16 or 24 bytes");
@@ -126,6 +168,15 @@ public class DesUtil {
         return result;
     }
 
+    /**
+     * 3DES EEE CBC加解密的实现
+     * @param key 密钥，长度为16或者24字节
+     * @param src 源数据，长度必须是8字节的整数倍
+     * @param icv 8字节的向量
+     * @param encrypting 加密还是解密
+     * @return 结果
+     * @throws DesException 方法出错时抛出异常
+     */
     public static byte[] desEeeCbc(final byte[] key, final byte[] src, final byte[] icv, final boolean encrypting) throws DesException {
         if(key == null || (key.length != 16 && key.length != 24)) {
             throw new DesException("DesEEE key should be 16 or 24 bytes");
