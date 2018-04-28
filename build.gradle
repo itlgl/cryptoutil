@@ -1,9 +1,7 @@
 group 'com.itlgl'
-version '0.0.1'
+version '0.0.2'
 
 apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
 
 sourceCompatibility = 1.7
 
@@ -15,97 +13,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'com.itlgl:byteutil:0.0.5'
     compile 'org.bouncycastle:bcprov-jdk15on:1.57'
-    compile 'org.bouncycastle:bcpkix-jdk15on:1.57'
 }
 
-String group = "com.itlgl"
-String version = "0.0.1"
-
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives jar, javadocJar, sourcesJar
-}
-
-signing {
-    sign configurations.archives
-}
-
-javadoc {
-    options {
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-    }
-}
-
-// Because if one does not want to release and
-// therefore does not have gradle.properties
-// the whole build will fail because the uploadArchives
-// is being evaluated and sonatypeUsername
-// and sonatypePassword is not going to be present
-// using '<<' in uploadArchives could be an option,
-// but it is deprecated in gradle 3.4
-def getSonatypeProperty(String name) {
-    name = 'sonatype' + name.capitalize()
-    if (project.hasProperty(name)) {
-        return project.getProperties()[name]
-    } else {
-        return ''
-    }
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: getSonatypeProperty('username'), password: getSonatypeProperty('password'))
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: getSonatypeProperty('username'), password: getSonatypeProperty('password'))
-            }
-
-            pom.project {
-                name 'cryptoutil-jre'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'java加解密工具类，包括DESeee和AES256等JDK屏蔽的加解密算法'
-                url 'https://github.com/itlgl/cryptoutil'
-
-                scm {
-                    tag 'master'
-                    url 'https://github.com/itlgl/cryptoutil'
-                    connection 'scm:git:git@github.com:itlgl/cryptoutil.git'
-                    developerConnection 'scm:git:git@github.com:itlgl/cryptoutil.git'
-                    url 'http://foo.googlecode.com/svn/trunk/'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'itlgl'
-                        name 'itlgl'
-                        email 'itlgl@outlook.com'
-                    }
-                }
-            }
-        }
-    }
-}
+apply from: 'https://raw.github.com/itlgl/gradle-mvn-push/master/gradle-mvn-push-java.gradle'

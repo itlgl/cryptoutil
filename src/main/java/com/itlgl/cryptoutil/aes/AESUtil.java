@@ -8,6 +8,7 @@ import org.bouncycastle.crypto.params.KeyParameter;
 import org.bouncycastle.crypto.params.ParametersWithIV;
 
 public class AESUtil {
+    // 进行AES运算的方法，内部调用
     private static byte[] aesEcb(byte[] key, byte[] src, boolean encrypting) throws AESException {
         byte[] result = new byte[src.length];
         try {
@@ -24,7 +25,7 @@ public class AESUtil {
     /**
      * AES 128 ECB的加解密实现
      * @param key 16字节的密钥，密钥长度不对抛出异常
-     * @param src 要加密或解密的数据，数据必须是8字节的整数倍
+     * @param src 要加密或解密的数据，数据必须是16字节的整数倍
      * @param encrypting 加密还是解密
      * @return 结果
      * @throws AESException 错误是抛出异常
@@ -42,7 +43,7 @@ public class AESUtil {
     /**
      * AES 192 ECB的加解密算法实现
      * @param key 24字节密钥，密钥长度不对抛出异常
-     * @param src 要加密或解密的数据，数据必须是8字节的整数倍
+     * @param src 要加密或解密的数据，数据必须是16字节的整数倍
      * @param encrypting 加密还是解密
      * @return 结果
      * @throws AESException 错误是抛出异常
@@ -51,8 +52,8 @@ public class AESUtil {
         if(key == null || key.length != 24) {
             throw new AESException("AES key should be 24 bytes");
         }
-        if(src == null || src.length % 24 != 0) {
-            throw new AESException("AES src should be an integer multiple of 24");
+        if(src == null || src.length % 16 != 0) {
+            throw new AESException("AES src should be an integer multiple of 16");
         }
         return aesEcb(key, src, encrypting);
     }
@@ -60,7 +61,7 @@ public class AESUtil {
     /**
      * AES 256 ECB的加解密算法实现
      * @param key 32字节密钥，密钥长度不对抛出异常
-     * @param src 要加密或解密的数据，数据必须是8字节的整数倍
+     * @param src 要加密或解密的数据，数据必须是16字节的整数倍
      * @param encrypting 加密还是解密
      * @return 结果
      * @throws AESException 错误是抛出异常
@@ -69,12 +70,13 @@ public class AESUtil {
         if(key == null || key.length != 32) {
             throw new AESException("AES key should be 32 bytes");
         }
-        if(src == null || src.length % 32 != 0) {
-            throw new AESException("AES src should be an integer multiple of 32");
+        if(src == null || src.length % 16 != 0) {
+            throw new AESException("AES src should be an integer multiple of 16");
         }
         return aesEcb(key, src, encrypting);
     }
 
+    // 进行AES运算的方法，内部调用
     private static byte[] aesCbc(byte[] key, byte[] icv, byte[] src, boolean encrypting) throws AESException {
         byte[] result = new byte[src.length];
         try {
@@ -120,8 +122,8 @@ public class AESUtil {
         if(key == null || key.length != 24) {
             throw new AESException("AES key should be 24 bytes");
         }
-        if(src == null || src.length % 24 != 0) {
-            throw new AESException("AES src should be an integer multiple of 24");
+        if(src == null || src.length % 16 != 0) {
+            throw new AESException("AES src should be an integer multiple of 16");
         }
         return aesCbc(key, icv, src, encrypting);
     }
@@ -139,8 +141,8 @@ public class AESUtil {
         if(key == null || key.length != 32) {
             throw new AESException("AES key should be 32 bytes");
         }
-        if(src == null || src.length % 32 != 0) {
-            throw new AESException("AES src should be an integer multiple of 32");
+        if(src == null || src.length % 16 != 0) {
+            throw new AESException("AES src should be an integer multiple of 16");
         }
         return aesCbc(key, icv, src, encrypting);
     }
