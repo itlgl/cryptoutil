@@ -26,7 +26,7 @@ compile 'com.itlgl:cryptoutil:0.0.2'
 
 ## 直接下载jar包
 
-[cryptoutil-0.0.2.jar](http://search.maven.org/remotecontent?filepath=com/itlgl/byteutil/0.0.5/byteutil-0.0.5.jar)
+[cryptoutil-0.0.2.jar](http://search.maven.org/remotecontent?filepath=com/itlgl/cryptoutil/0.0.2/byteutil-0.0.2.jar)
 
 
 ## 关于我
